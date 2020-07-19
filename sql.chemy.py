@@ -15,8 +15,8 @@ users = Table(
 
 Session = Table(
    'session', meta,
-   Column('id', String(50), ForeignKey('users.id')),
-   Column('user_id', Integer),
+   Column('id', String(50), primary_key=True),
+   Column('user_id', Integer, ForeignKey('users.id')),
    Column('created_date', Date),
    Column('expired_date', Date),
    Column('data', Text),
@@ -25,10 +25,10 @@ Session = Table(
 )
 Transaction = Table(
    'transaction', meta,
-   Column('id', Integer, ForeignKey('users.id')),
+   Column('id', Integer, primary_key=True),
    Column('created_date', Date),
    Column('type_transaction', SMALLINT),
    Column('amount', BigInteger),
-   Column('user_id', Integer),
+   Column('user_id', Integer, ForeignKey('users.id')),
 )
 meta.create_all(engine)
